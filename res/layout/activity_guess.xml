@@ -15,7 +15,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="178dp"
-        android:ems="10" />
+        android:ems="10"
+        android:inputType="text"
+        android:maxLength="15"
+        android:lines="1"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
     <TextView
         android:id="@+id/textView1"
@@ -48,11 +52,14 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
         android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/editText1"
+    	android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FF0000" />
 
@@ -60,10 +67,12 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:minHeight="256px"
-        android:minWidth="256px"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="27dp"
+        android:minHeight="128px"
+        android:minWidth="128px"
         android:scaleType="fitCenter"
         android:src="@drawable/hang0" />
 

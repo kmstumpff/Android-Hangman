@@ -87,8 +87,12 @@ public class GuessActivity extends Activity {
             	switch (State) {
             	case 1:
             		myWord = textInput.getText().toString().toLowerCase(Locale.getDefault());
-            		myWordArray = myWord.toCharArray();
             		lengthOfWord = myWord.length();
+            		if (lengthOfWord == 0) {
+            			textError.setText("Error: No word entered");
+            			break;
+            		}
+            		myWordArray = myWord.toCharArray();
             		guessWordArray = new char[myWord.length()];
             		for (int i=0;i<myWord.length();i++) {
             			guessWordArray[i] = 42;
