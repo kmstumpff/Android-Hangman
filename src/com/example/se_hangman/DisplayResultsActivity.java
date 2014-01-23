@@ -13,8 +13,6 @@ public class DisplayResultsActivity extends Activity {
 	Intent mainIntent;
 	public void sendMessage(View view) {
 	    Intent intent = new Intent(this, GuessActivity.class);
-	    String message = "";
-	    //intent.putExtra(EXTRA_MESSAGE, message);
 	    startActivity(intent);
 	    finish();
 	}
@@ -25,14 +23,15 @@ public class DisplayResultsActivity extends Activity {
 		setContentView(R.layout.activity_display_results);
 		
 		mainIntent = getIntent();
-		int results = mainIntent.getIntExtra("results", 0); //mainIntent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		int results = mainIntent.getIntExtra("results", 0); 
+		String myWord = mainIntent.getStringExtra("word"); 
         final TextView textResults = (TextView) findViewById(R.id.textView1);
         final Button btnAgain = (Button) findViewById(R.id.button1);
         
         if (results == 1) {
-        	textResults.setText("Congratulations!\nYou Won!");
+        	textResults.setText("Congratulations!\nYou Won!\n\nThe word was:\n" + myWord);
         } else if (results == 2) {
-        	textResults.setText("Sorry\nYou Lost...");
+        	textResults.setText("Sorry\nYou Lost...\n\nThe word was:\n" + myWord);
         } else {
         	textResults.setText("There was an error!");
         }

@@ -14,6 +14,8 @@ import android.text.InputFilter;
 
 public class GuessActivity extends Activity {
 
+	// Global variables
+	
 	int State = 1;	// 1 = Default: User needs to enter a word
 					// 2 = User has entered a word and needs to guess the letters
 	int Status = 0;	// 0 = Game is not finished
@@ -32,14 +34,16 @@ public class GuessActivity extends Activity {
 
 	Intent intentThis = getIntent();
 	
-	public void sendMessage(View view, int results) {
+	// Function to send the results to the DisplayResultsActivity activity
+	public void sendMessage(View view, int results, String myWord) {
 	    Intent intent = new Intent(this, DisplayResultsActivity.class);
 	    intent.putExtra("results", results);
+	    intent.putExtra("word", myWord);
 	    System.out.println("starting DisplayResultsActivity");
 	    startActivity(intent);
 	    finish();
 	}
-	
+	// Function to check if the user has won/lost/still guessing
 	private int checkIfFinished(char[] myWordArray, char[] guessWordArray, int numTries) {
 		String myWordString = new String(myWordArray);
 		String guessWordString = new String(guessWordArray);
@@ -49,6 +53,7 @@ public class GuessActivity extends Activity {
 			return 2;
 		return 0;
 	}
+	// Function to set the hangman icon based on the number of wrong guesses.
 	private void setIcon(ImageView hmIcon, int numTries) {
 		if (numTries == 1) {
 			hmIcon.setImageResource(R.drawable.hang1);
@@ -86,6 +91,7 @@ public class GuessActivity extends Activity {
             public void onClick(View v) {
             	switch (State) {
             	case 1:
+            		// User needs to input a word.
             		myWord = textInput.getText().toString().toLowerCase(Locale.getDefault());
             		lengthOfWord = myWord.length();
             		if (lengthOfWord == 0) {
@@ -104,6 +110,7 @@ public class GuessActivity extends Activity {
             		State = 2;
             		break;
             	case 2:
+            		// User is currently guessing a letter
             		guessChar = textInput.getText().toString().toLowerCase(Locale.getDefault()).charAt(0);
             		
             		if (guessChar >= 97 && guessChar <= 122) {
@@ -135,12 +142,15 @@ public class GuessActivity extends Activity {
 	            		Status = checkIfFinished(myWordArray, guessWordArray, numTries);
 	            	    System.out.println("Status=" + Status);
 	            		if (Status == 1) {
-	            			sendMessage(v, Status);
+	            			// User has won the game
+	            			sendMessage(v, Status, myWord);
 	            		}
 	            		if (Status == 2) {
-	            			sendMessage(v, Status);
+	            			// User has lost the game
+	            			sendMessage(v, Status, myWord);
 	            		}
             		} else {
+            			// This should never occur
             			textError.setText("Invalid character");
             		}
             		break;
